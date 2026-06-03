@@ -1,0 +1,9 @@
+@import './variables';
+@import './mixins';
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
