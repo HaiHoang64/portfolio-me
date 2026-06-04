@@ -1,0 +1,29 @@
+.hero {
+  min-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  h1 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    max-width: 700px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    cursor: pointer;
+  }
+}

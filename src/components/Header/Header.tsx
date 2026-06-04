@@ -2,15 +2,22 @@ import React from 'react';
 import './Header.scss';
 
 function Header() {
-   return   (
+  return (
     <header className="header">
-        My Portfolio
+      <div className="logo">
+        Hai Hoang
+      </div>
+
+      <nav>
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Projects</li>
+          <li>Contact</li>
+        </ul>
+      </nav>
     </header>
-    );
-    
-    {/* <div style={{ background: 'red' }}>
-        <h1>Header</h1>
-    </div> */}
+  );
 }
 
 export default Header;
