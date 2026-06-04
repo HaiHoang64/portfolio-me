@@ -1,0 +1,57 @@
+// ==========================================================================
+// DESIGN SYSTEM TOKENS (_variables.scss)
+// ==========================================================================
+
+// 1. Typography Fonts
+$font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+$font-code: 'JetBrains Mono', 'Fira Code', monospace; // Dành cho mảng Automation/Data
+
+// 2. Font Sizes (Quy đổi sang rem dựa trên gốc 16px của trình duyệt)
+$font-size-h1: 2.25rem;     // 36px
+$font-size-h2: 1.75rem;     // 28px
+$font-size-h3: 1.25rem;     // 20px
+$font-size-base: 1rem;      // 16px
+$font-size-small: 0.875rem; // 14px
+
+// 3. Spacing System (Hệ thống khoảng cách nhân hệ số 4)
+$spacing-1: 0.25rem; // 4px
+$spacing-2: 0.5rem;  // 8px
+$spacing-3: 0.75rem; // 12px
+$spacing-4: 1rem;    // 16px (Base)
+$spacing-6: 1.5rem;  // 24px
+$spacing-8: 2rem;    // 32px
+$spacing-12: 3rem;   // 48px
+
+// 4. Theme Colors (Native CSS Variables phục vụ Dark/Light Mode)
+:root {
+  // Light Mode (Mặc định)
+  --color-primary: #0EA5E9;       // Sky Blue (Data vibe)
+  --color-secondary: #10B981;     // Emerald Green (Automation vibe)
+  --color-bg: #F8FAFC;            // Slate 50
+  --color-bg-card: #FFFFFF;
+  --color-text: #0F172A;          // Slate 900
+  --color-text-muted: #64748B;    // Slate 500
+  --color-border: #E2E8F0;        // Slate 200
+  
+  // Hiệu ứng mượt mà khi chuyển màu nền
+  --theme-transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme='dark'] {
+  // Dark Mode Override (Kích hoạt khi thẻ html/body có thuộc tính data-theme="dark")
+  --color-bg: #0F172A;            // Slate 900
+  --color-bg-card: #1E293B;       // Slate 800
+  --color-text: #F8FAFC;          // Slate 50
+  --color-text-muted: #94A3B8;    // Slate 400
+  --color-border: #334155;        // Slate 700
+}
+
+// 5. SCSS Mapping (Giúp bạn viết code ngắn gọn và được IDE gợi ý tốt hơn)
+$color-primary: var(--color-primary);
+$color-secondary: var(--color-secondary);
+$theme-bg: var(--color-bg);
+$theme-card: var(--color-bg-card);
+$theme-text: var(--color-text);
+$theme-text-muted: var(--color-text-muted);
+$theme-border: var(--color-border);
+$theme-transition: var(--theme-transition);
