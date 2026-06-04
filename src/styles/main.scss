@@ -1,9 +1,58 @@
-@import './variables';
+// @import './variables';
+// @import './mixins';
+
+// body {
+//   margin: 0;
+//   font-family: 'Inter', sans-serif;
+//   background-color: #f8fafc;
+//   color: #0f172a;
+// }
+
+
+// src/styles/main.scss
+
+// 1. Import Core Thiết kế (Không sinh ra code CSS trực tiếp, chỉ nạp biến và hàm)
+
+
+@import  './variables';
 @import './mixins';
 
-body {
+// 2. CSS Reset & Base Rules (Bắt đầu áp dụng biến vào phần tử thật)
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
+  padding: 0;
+}
+
+body {
+  font-family: $font-primary;
+  background-color: $theme-bg;
+  color: $theme-text;
+  transition: $theme-transition;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Ví dụ minh họa cách bạn sẽ code một Component sau này:
+.project-card {
+  background-color: $theme-card;
+  border: 1px solid $theme-border;
+  padding: $spacing-6;
+  
+  .project-card__title {
+    font-size: $font-size-h3;
+    font-family: $font-code; // Code vibe cho tiêu đề dự án
+    @include text-truncate(1); // Cắt chữ nếu tiêu đề quá dài
+  }
+
+  // Responsive trên màn hình Laptop trở lên
+  @include respond-to('lg') {
+    padding: $spacing-8;
+  }
 }

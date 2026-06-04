@@ -1,0 +1,63 @@
+// ==========================================================================
+// REUSABLE MIXINS & BREAKPOINTS (_mixins.scss)
+// ==========================================================================
+
+// 1. Định nghĩa danh sách các Breakpoints (Mobile First)
+$breakpoints: (
+  'sm': 576px,   // Mobile ngang / Máy tính bảng nhỏ
+  'md': 768px,   // Máy tính bảng tiêu chuẩn
+  'lg': 1024px,  // Laptop / iPad Pro
+  'xl': 1200px,  // Desktop lớn
+);
+
+// 2. Mixin Responsive: @mixin respond-to($breakpoint)
+// Cách dùng trong component: @include respond-to('md') { ... viết CSS cho iPad ở đây ... }
+@mixin respond-to($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @warn "Giá trị breakpoint '#{$breakpoint}' không hợp lệ.";
+  }
+}
+
+// 3. Mixin Flexbox Helpers (Giảm thiểu việc lặp lại 3-4 dòng flexbox liên tục)
+@mixin flex-center($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// 4. Mixin Cắt chữ (Text Truncate)
+// Hữu ích cho phần danh sách Dự án/Blog: Nếu mô tả quá dài sẽ tự động biến thành dấu ba chấm "..."
+// SỬA LẠI ĐOẠN NÀY TRONG FILE _mixins.scss
+
+// 4. Mixin Cắt chữ (Text Truncate)
+@mixin text-truncate($lines: 1) {
+  @if $lines == 1 {  // <-- Thêm dấu @ vào đây thành @if
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {          // <-- Bây giờ @else đã hợp lệ vì đã có @if ở trên
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+// 5. Mixin Hover Glassmorphism Effect (Tạo hiệu ứng công nghệ cao cho các Card)
+@mixin glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
