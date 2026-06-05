@@ -14,8 +14,11 @@
 // 1. Import Core Thiết kế (Không sinh ra code CSS trực tiếp, chỉ nạp biến và hàm)
 
 
-@import  './variables';
-@import './mixins';
+// @import  './variables';
+// @import './mixins';
+
+@use './variables' as *;
+@use './mixins' as *;
 
 // 2. CSS Reset & Base Rules (Bắt đầu áp dụng biến vào phần tử thật)
 *, *::before, *::after {
@@ -44,6 +47,10 @@ a {
   background-color: $theme-card;
   border: 1px solid $theme-border;
   padding: $spacing-6;
+
+html {
+  scroll-behavior: smooth;
+}
   
   .project-card__title {
     font-size: $font-size-h3;

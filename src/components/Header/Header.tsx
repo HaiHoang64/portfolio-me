@@ -4,16 +4,17 @@ import './Header.scss';
 function Header() {
   return (
     <header className="header">
-      <div className="logo">
+      {/* <div className="logo">
         Hai Hoang
-      </div>
+      </div> */}
+      <h2>Hai Hoang</h2>
 
       <nav>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Projects</li>
-          <li>Contact</li>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">About</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
