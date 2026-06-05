@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use './variables' as *; // Nạp variables vào đây để mixin hiểu được biến $breakpoints
+
 // ==========================================================================
 // REUSABLE MIXINS & BREAKPOINTS (_mixins.scss)
 // ==========================================================================
@@ -13,8 +16,10 @@ $breakpoints: (
 // 2. Mixin Responsive: @mixin respond-to($breakpoint)
 // Cách dùng trong component: @include respond-to('md') { ... viết CSS cho iPad ở đây ... }
 @mixin respond-to($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media (min-width: map-get($breakpoints, $breakpoint)) {
+ // Thay map-has-key bằng map.has-key
+  @if map.has-key($breakpoints, $breakpoint) {
+   // Thay map-get bằng map.get
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
       @content;
     }
   } @else {
