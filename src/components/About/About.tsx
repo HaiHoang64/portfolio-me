@@ -1,3 +1,4 @@
+// https://gemini.google.com/app/dfe1bc6c17df07df
 import './About.scss';
 
 const About = () => {
