@@ -1,6 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
 import './styles/main.scss' // Import file style tổng tại đây
 import Home from './pages/Home.tsx';
 

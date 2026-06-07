@@ -1,71 +1,49 @@
-Landing
-   │
-   ▼
-About Me
-   │
-   ▼
-Projects
-   │
-   ▼
-Project Detail
-   │
-   ▼
-Contact
+# Development & Git Workflow Standard
 
+Để học tập cách làm việc chuyên nghiệp như trong dự án thực tế tại doanh nghiệp, dự án này tuân thủ các quy tắc nghiêm ngặt về phân nhánh Git, quy trình phát triển tính năng và quy chuẩn ghi chú lịch sử commit.
 
+---
 
-Requirement
-    │
-    ▼
-Design
-    │
-    ▼
-Create Branch
-    │
-    ▼
-Develop
-    │
-    ▼
-Test
-    │
-    ▼
-Merge
-    │
-    ▼
-Deploy
+## 1. Quy trình Phát triển Tính năng (Feature Development Flow)
 
+Mỗi thay đổi (thêm tính năng, sửa lỗi, chỉnh sửa tài liệu) đều đi qua các bước sau để đảm bảo chất lượng code và không làm hỏng nhánh chính:
 
+```mermaid
+graph TD
+    A[Phân tích yêu cầu - Requirement] --> B[Thiết kế giao diện/logic - Design]
+    B --> C[Tạo nhánh phát triển - Branching]
+    C --> D[Lập trình cục bộ - Local Dev]
+    D --> E[Kiểm tra & Cập nhật Docs - Local Test & Logging]
+    E --> F[Tạo Pull Request - Merge Request]
+    F --> G[Kiểm tra chất lượng & Merge - Code Review & Merge]
+    G --> H[Triển khai sản phẩm - Deploy]
+```
 
-# Git & Development Workflow Standard
+---
 
-Để học cách làm việc trong một dự án thực tế, chúng ta tuân thủ quy trình Git nghiêm ngặt nhằm tránh xung đột code (Conflicts) và theo dõi lịch sử rõ ràng.
+## 2. Chiến lược Phân nhánh Git (Branching Strategy)
 
-## 1. Nhánh Git (Branching Strategy)
-- `main`: Nhánh Production. Chỉ chứa code đã kiểm thử hoàn toàn, chạy ổn định tuyệt đối.
-- `develop`: Nhánh tích hợp. Nơi chứa code mới nhất đang phát triển từ các tính năng gom về.
-- `feature/<tên-tính-năng>`: Nhánh phát triển tính năng cụ thể. Tạo ra từ `develop` và merge về `develop` sau khi hoàn thành thông qua Pull Request (PR).
+Dự án áp dụng mô hình phân nhánh chuẩn để cô lập các môi trường:
 
-*Ví dụ:* `feature/navbar`, `feature/project-filter`, `feature/sprint1-setup`.
+- **`main` (Production Branch):** Nhánh chính thức chạy ổn định trên Internet. Chỉ merge từ `develop` về khi đã hoàn tất kiểm tra chất lượng ở cuối mỗi Sprint.
+- **`develop` (Integration Branch):** Nhánh tích hợp chính. Tất cả lập trình viên sẽ kéo code mới nhất từ đây để bắt đầu làm việc và merge các tính năng đã hoàn thành vào đây.
+- **`feature/<tên-tính-năng>` (Feature Branch):** Các nhánh con được tạo từ `develop` để xử lý một công việc cụ thể (ví dụ: `feature/dark-mode`, `feature/sprint3-hero`, `fix/navbar-link-text`). Sau khi làm xong sẽ merge ngược về `develop`.
 
-## 2. Quy trình làm việc hàng ngày (Daily Workflow)
-1. Kéo code mới nhất về từ nhánh chung: `git checkout develop && git pull origin develop`
-2. Tạo nhánh tính năng mới: `git checkout -b feature/sprint1-setup`
-3. Tiến hành Code và kiểm thử Local.
-4. Commit code theo quy chuẩn (Xem mục 3).
-5. Đẩy nhánh lên GitHub: `git push origin feature/sprint1-setup`
-6. Tạo Pull Request trên GitHub từ nhánh `feature/...` sang nhánh `develop`. (Trong dự án thực tế, Tech Lead sẽ Review đoạn này trước khi Merge).
+---
 
 ## 3. Quy chuẩn Commit Message (Conventional Commits)
-Cú pháp: `<type>(<scope>): <description>`
 
-Các `type` được chấp nhận:
-- `feat`: Tính năng mới (Feature).
-- `fix`: Sửa lỗi (Bug fix).
-- `docs`: Thay đổi tài liệu hướng dẫn.
-- `style`: Thay đổi định dạng code (Format, khoảng trắng, không ảnh hưởng logic).
-- `refactor`: Tái cấu trúc code nhưng không thay đổi tính năng hay sửa lỗi.
-- `chore`: Cấu hình build, cài thêm thư viện phụ trợ...
+Chúng ta tuân thủ quy chuẩn quốc tế để mọi lập trình viên hoặc AI khác đọc lịch sử git đều hiểu ngay thay đổi đó làm gì.
 
-*Ví dụ chuẩn:*
-- `chore(env): setup vite project with typescript template`
-- `feat(ui): add responsive navbar with dark mode toggle`
+**Cú pháp tiêu chuẩn:**
+```
+<type>(<scope>): <mô tả ngắn gọn bằng tiếng Anh>
+```
+
+- **`feat`:** Tính năng mới (ví dụ: `feat(ui): add project filter buttons to projects grid`).
+- **`fix`:** Sửa lỗi (ví dụ: `fix(nav): correct typo in projects link label`).
+- **`docs`:** Chỉnh sửa hoặc thêm tài liệu (ví dụ: `docs(arch): rewrite system architecture for portfolio`).
+- **`style`:** Các thay đổi không ảnh hưởng logic (format code, thêm khoảng trắng, chỉnh sửa CSS/SCSS thô).
+- **`refactor`:** Thay đổi logic code nhưng không đổi tính năng hay sửa lỗi (tái cấu trúc code gọn hơn).
+- **`chore`:** Cài đặt thư viện, cấu hình build, cấu hình ESLint, v.v. (ví dụ: `chore(deps): update react dependencies`).
+- **`test`:** Bổ sung hoặc sửa đổi các file test.
