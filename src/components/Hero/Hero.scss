@@ -1,29 +1,78 @@
-.hero {
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero-section {
+  /* Thiết kế Mobile-First: Mặc định xếp dọc */
+  display: flex;
+  flex-direction: column-reverse; /* Đẩy chữ xuống dưới ảnh trên mobile, hoặc đổi thành column nếu thích */
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 1.5rem;
+  text-align: center;
   min-height: 80vh;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-
-  h1 {
-    font-size: 4rem;
-    margin-bottom: 10px;
+  /* Responsive Desktop: Áp dụng mixin lg (1024px) */
+  @include respond-to('lg') {
+    flex-direction: row;
+    @include flex-between; /* Mixin dàn trang ngang */
+    text-align: left;
+    padding: 6rem 5rem;
   }
 
-  h2 {
-    margin-bottom: 20px;
+  .hero-content {
+    flex: 1;
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem); /* Tự động co giãn kích thước chữ */
+      font-weight: 700;
+      color: var(--color-text); /* Sử dụng biến CSS theo cấu trúc */
+      margin-bottom: 0.5rem;
+    }
+
+    .role {
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      color: var(--color-primary); /* Đổi màu nhấn cho role */
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: var(--color-text);
+      opacity: 0.8;
+      max-width: 600px;
+    }
+
+    .btn-primary {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-bg);
+      background-color: var(--color-primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
   }
 
-  p {
-    max-width: 700px;
-  }
+  .hero-image {
+    flex: 1;
+    @include flex-center; /* Mixin căn giữa */
 
-  button {
-    margin-top: 20px;
-    padding: 12px 24px;
-    cursor: pointer;
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      /* Nếu ảnh của bạn là PNG tách nền, thêm chút drop-shadow sẽ rất đẹp */
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1)); 
+    }
   }
 }

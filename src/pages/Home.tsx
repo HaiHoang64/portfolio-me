@@ -14,7 +14,7 @@ function Home() {
     <Header />
 
     <main className="content">
-        <h1>Home!</h1>
+        {/* <h1>Home!</h1> */}
         <Hero />
         <About />
         <Projects />

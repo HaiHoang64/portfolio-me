@@ -1,9 +1,105 @@
-.about {
-  background: blue;
-  min-height: 100vh;
 
-  h1 {
-    color: white;
-    text-align: center;
+// @use '../styles/_variables' as *;
+// @use '../styles/_mixins' as *;
+@use '../styles/mixins' as *;
+@use '../styles/variables' as *;
+
+.about-section {
+  padding: 5rem 1.5rem;
+  /* Nếu muốn phần này tách biệt với Hero, có thể gán một màu nền hơi khác chút */
+  /* background-color: var(--color-bg-alt); */
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    /* Áp dụng mixin cho Desktop */
+    @include respond-to('lg') {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .about-text {
+    flex: 1;
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      /* Đường gạch chân trang trí (Underline accent) */
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 60px;
+        height: 4px;
+        background-color: var(--color-primary);
+        border-radius: 2px;
+      }
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .skills-container {
+    flex: 1;
+
+    h3 {
+      font-size: 1.8rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      /* Tự động chia cột linh hoạt dựa trên kích thước màn hình */
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1.5rem;
+
+      .skill-card {
+        @include flex-center;
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.05); /* Viền mờ */
+        background: rgba(0, 0, 0, 0.02);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          background: var(--color-bg);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+          border-color: var(--color-primary);
+        }
+
+        .skill-icon {
+          width: 40px;
+          height: 40px;
+          /* Đảm bảo màu icon đồng nhất với màu nhấn của website */
+          fill: var(--color-primary); 
+        }
+
+        span {
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--color-text);
+          text-align: center;
+        }
+      }
+    }
   }
 }

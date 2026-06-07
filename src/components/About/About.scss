@@ -1,7 +1,116 @@
-.about {
-  padding: 80px 50px;
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
-  h2 {
-    margin-bottom: 20px;
+.about-section {
+  padding: 5rem 1.5rem;
+  /* Nếu muốn phần này tách biệt với Hero, có thể gán một màu nền hơi khác chút */
+  /* background-color: var(--color-bg-alt); */
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+
+    /* Áp dụng mixin cho Desktop */
+    @include respond-to('lg') {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .about-text {
+    flex: 1;
+
+    h2 {
+      font-size: 2.5rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+      position: relative;
+
+      /* Đường gạch chân trang trí (Underline accent) */
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 60px;
+        height: 4px;
+        background-color: var(--color-primary);
+        border-radius: 2px;
+      }
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--color-text);
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .skills-container {
+    flex: 1;
+
+    h3 {
+      font-size: 1.8rem;
+      color: var(--color-text);
+      margin-bottom: 1.5rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      /* Tự động chia cột linh hoạt dựa trên kích thước màn hình */
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1.5rem;
+
+      .skill-card {
+        @include flex-center;
+        flex-direction: column;
+        gap: 0.8rem;
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: rgba(0, 0, 0, 0.02);
+        transition: all 0.3s ease;
+
+        &:hover {
+          transform: translateY(-5px);
+          background: var(--color-bg);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+          border-color: var(--color-primary);
+          
+          .skill-icon {
+            color: #00a8ff; 
+            fill: #00a8ff; /* Phải đổi màu cả fill để ăn khớp toàn bộ icon */
+          }
+        }
+
+        .skill-icon {
+          width: 40px !important;
+          height: 40px !important;
+          display: block; /* Quan trọng: Xóa khoảng trắng thừa của thẻ inline */
+          overflow: visible; /* Quan trọng: Chống bị xén các viền sát mép */
+          
+          /* Gộp chung màu sắc cho các icon dùng fill hoặc stroke */
+          fill: var(--color-primary); 
+          color: #0a192f; /* Dành cho các icon dùng currentColor (như RPA) */
+          
+          transition: all 0.3s ease;
+          margin-bottom: 12px;
+          
+          /* Xóa object-fit: contain; đi vì nó vô tác dụng với thẻ <svg> */
+        }
+
+        span {
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--color-text);
+          text-align: center;
+        }
+      }
+    }
   }
 }
